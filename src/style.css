@@ -106,7 +106,7 @@
       background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 20 10 M 10 0 L 10 20" fill="none" stroke="%23002200" stroke-width="0.5"/></svg>');
       font-family: var(--font-main);
       color: var(--primary-accent);
-      padding: 0;
+      padding: 0px;
       line-height: 1.7;
       overflow-x: hidden;
   }
@@ -282,7 +282,7 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      background-color: rgb(32, 32, 32);
+      background-color: rgb(17, 17, 17);
       border-bottom: 1px solid var(--primary-accent); 
       position: relative; 
       z-index: 10; 
@@ -512,6 +512,15 @@
 
   /* 11. Responsive Design */
   @media (max-width: 768px) {
+
+      body{
+        padding: 12px;
+      }
+      .navbar{
+        padding: 0px;
+        border-radius: 8px;
+        border: 1px solid var(--primary-accent);
+      }
       .nav-links {
           display: none;
           flex-direction: column;
