@@ -1317,7 +1317,7 @@
 
 
                     const payload = { contents: conversationForAPI };
-                    const apiKey = "AIzaSyAxMDDrKSWjVkh3IYNoalI3U1FIO9TPwIY"; // Leave as-is, Canvas will provide it
+                    const apiKey = import.meta.env.VITE_GEMINI_API_KEY; // Leave as-is, Canvas will provide it
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                     const response = await fetch(apiUrl, {
