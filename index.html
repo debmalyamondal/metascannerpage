@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metascanner</title>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="assets/scan-line.svg">
+    <!-- Google Fonts: Share Tech Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+    /* 1. HACKER THEME - Design System & Variables */
+    :root {
+        --bg-color: #000000;
+        --primary-accent: #00ff00;
+        --secondary-accent: #008000;
+        --glow-color: rgba(0, 255, 0, 0.5);
+        --font-main: 'Share Tech Mono', monospace;
+        --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* 2. Base & General Styling */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        background-color: var(--bg-color);
+        background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M 0 10 L 20 10 M 10 0 L 10 20" fill="none" stroke="%23002200" stroke-width="0.5"/></svg>');
+        font-family: var(--font-main);
+        color: var(--primary-accent);
+        padding: 0;
+        line-height: 1.7;
+        overflow-x: hidden;
+        /* Remove flex, align-items, gap */
+    }
+    /* CRT Scanline & Flicker Effect */
+    body::after {
+        content: ' ';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        z-index: 2;
+        pointer-events: none;
+        background-size: 100% 4px, 6px 100%;
+        animation: flicker 0.15s infinite;
+    }
+    @keyframes flicker {
+        0% { opacity: 0.21; }
+        10% { opacity: 0.45; }
+        20% { opacity: 0.38; }
+        30% { opacity: 0.65; }
+        40% { opacity: 0.32; }
+        50% { opacity: 0.92; }
+        60% { opacity: 0.15; }
+        70% { opacity: 0.45; }
+        80% { opacity: 0.7; }
+        90% { opacity: 0.2; }
+        100% { opacity: 0.88; }
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    section {
+        padding: 80px 0;
+        margin: 0 auto;
+        border-bottom: 0px solid var(--secondary-accent);
+    }
+    section:last-of-type {
+        border-bottom: none;
+    }
+    h2 {
+        font-size: 2.2rem;
+        text-align: center;
+        font-family: var(--font-main);
+        color: white;
+        margin-bottom: 40px;
+        background: none;
+    }
+    /* Grid layouts: features, tech, use-cases */
+    .features-grid, .use-case-grid, .tech-grid-full {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 10px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    .feature-card, .tech-card {
+        background: rgba(0, 20, 0, 0.3);
+        border: 1px solid var(--secondary-accent);
+        padding: 30px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .feature-card:hover, .tech-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-accent);
+        box-shadow: 0 5px 20px rgba(0, 255, 0, 0.2), inset 0 0 10px var(--glow-color);
+    }
+    .tech-card img {
+        height: 50px;
+        width: auto;
+        max-width: 150px;
+        margin-bottom: 20px;
+        object-fit: contain;
+    }
+    .dashboard-image-container {
+        margin-top: 60px;
+        padding: 10px;
+        border: 0px solid var(--primary-accent);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 0;
+    }
+    /* Remove gap from body, add spacing via section padding and grid gap */
+
+    /* 3. Typography */
+    h1, h2, h3, p, a, cite { text-shadow: 0 0 5px var(--glow-color); }
+    h1 { 
+        font-size: 3rem; 
+        animation: glitch 1.5s linear infinite;
+        font-family: 'Michroma';
+        letter-spacing: 1px;
+    }
+    h2 { 
+        font-size: 2.2rem; 
+        text-align: center;
+        font-family: var(--font-main);
+        color: white;
+        margin-bottom: 10px; 
+        background-color: #00a300;
+    }
+    h3 { 
+        font-family: 'bebas neue';
+        letter-spacing: 0.2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 1.4rem; 
+        margin-bottom: 0.75rem; 
+    }
+    p { font-size: 1.1rem; color: white; opacity: 0.8; }
+    a { text-decoration: none; color: aliceblue;}
+
+    /* Glitch Animation */
+    @keyframes glitch{
+        2%,64%{ transform: translate(2px,0) skew(0deg); }
+        4%,60%{ transform: translate(-2px,0) skew(0deg); }
+        62%{ transform: translate(0,0) skew(5deg); }
+    }
+    h1:before, h1:after{
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        overflow: hidden;
+    }
+    h1:before{ left: 3px; text-shadow: -2px 0 #ff0000; animation: noise-anim-2 3s linear infinite; }
+    h1:after{ left: -3px; text-shadow: -2px 0 #0000ff; animation: noise-anim-1 2s linear infinite; }
+    @keyframes noise-anim-1{ 0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;} 10% {opacity: .1;} 50% {opacity: .5; left: -6px;} 80% {opacity: .3;} 100% {opacity: .6; left: 2px;} }
+    @keyframes noise-anim-2{ 0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;} 10% {opacity: .1;} 50% {opacity: .5; left: 6px;} 80% {opacity: .3;} 100% {opacity: .6; left: -2px;} }
+
+    /* 4. Buttons */
+    .btn { 
+        display: inline-block; 
+        padding: 12px 28px; 
+        font-family: var(--font-main); 
+        font-size: 1rem; 
+        border: 1px solid var(--primary-accent); 
+        background: rgb(23, 83, 8); 
+        color: var(--primary-accent); 
+        transition: all 0.3s ease; cursor: pointer; 
+    }
+    .btn:hover { background: var(--primary-accent); color: var(--bg-color); box-shadow: 0 0 20px var(--glow-color); }
+    .btn.pulse {
+        animation: btn-pulse 1.5s infinite alternate;
+        box-shadow: 0 0 10px var(--primary-accent), 0 0 20px var(--glow-color);
+    }
+    @keyframes btn-pulse {
+        from { box-shadow: 0 0 10px var(--primary-accent), 0 0 20px var(--glow-color); }
+        to { box-shadow: 0 0 20px var(--primary-accent), 0 0 60px var(--glow-color); }
+    }
+
+    /* 5. Header / Navbar */
+    .navbar { 
+        padding: 12px; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: rgb(32, 32, 32);
+        border-bottom: 1px solid var(--primary-accent); 
+        position: relative; 
+        z-index: 10; 
+    }
+    .nav-logo { 
+        font-family: Outfit;
+        color: #00ff00;
+        letter-spacing: 0.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        font-size: 1.2rem; 
+    }
+    .nav-logo i {
+        color: #0000ff;
+        
+    }
+    .nav-links { display: flex; 
+        align-items: center;  
+        gap: 30px; 
+        transition: all 0.3s ease; 
+    }
+    .nav-links a {
+        
+        padding: 10px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links a:hover { 
+        
+         background-color: var(--primary-accent);
+        color: var(--bg-color); 
+        
+    }
+
+    /* Mobile Menu Icon */
+    .menu-toggle {
+        display: none; /* Hidden by default, shown on mobile */
+        cursor: pointer;
+        font-size: 2rem;
+        color: var(--primary-accent);
+        
+    }
+
+    /* 6. Hero Section */
+    #hero { text-align: center; padding: 80px 0; position: relative; overflow: hidden; }
+    #hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: repeating-linear-gradient(135deg, rgba(0,255,0,0.04) 0px, rgba(0,255,0,0.04) 2px, transparent 2px, transparent 8px);
+        pointer-events: none;
+        z-index: 1;
+        animation: bg-move 8s linear infinite;
+    }
+    @keyframes bg-move {
+        0% { background-position: 0 0; }
+        100% { background-position: 100px 100px; }
+    }
+    #hero h1 { position: relative; }
+    #hero p { max-width: 650px; margin: 0 auto 40px auto; }
+    .dashboard-image-container svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .dashboard-image-container .map-path {
+        fill: #004400; /* Darker green for land */
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+    }
+
+    .dashboard-image-container .scan-line-h-b {
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+        animation: scanline-anim-b 2s linear infinite;
+    }
+    .dashboard-image-container .scan-line-v-r {
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+        animation: scanline-anim-r 2s linear infinite;
+    }
+
+    .dashboard-image-container .scan-line-h-t {
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+        animation: scanline-anim-t 2s linear infinite;
+    }
+    .dashboard-image-container .scan-line-v-l {
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+        animation: scanline-anim-l 2s linear infinite;
+    }
+
+    @keyframes scanline-anim-r {
+        0% { transform: translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateX(100%); opacity: 0; }
+    }
+    @keyframes scanline-anim-b {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateY(100%); opacity: 0; }
+    }
+    @keyframes scanline-anim-l {
+        0% { transform: translateX(100%); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateX(0); opacity: 0; }
+    }
+    @keyframes scanline-anim-t {
+        0% { transform: translateY(100%); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateY(0); opacity: 0; }
+    }
+    
+    .dashboard-image-container .pulse-circle {
+        fill: var(--primary-accent);
+        animation: pulse 1.5s infinite alternate;
+    }
+    @keyframes pulse {
+        from { r: 2; opacity: 0.8; }
+        to { r: 5; opacity: 0.2; }
+    }
+    .dashboard-image-container .terminal-text {
+        font-size: 10px;
+        fill: var(--primary-accent);
+    }
+    .dashboard-image-container .status-indicator {
+        fill: #00ff00;
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+    .dashboard-image-container .progress-bar-bg {
+        fill: #001100;
+        stroke: var(--secondary-accent);
+        stroke-width: 0.5;
+    }
+    .dashboard-image-container .progress-bar-fill {
+        fill: var(--primary-accent);
+        animation: progress-fill 3s linear forwards;
+    }
+    @keyframes progress-fill {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    /* 7. Components (Cards, Steps, etc) */
+    .feature-card, .testimonial-card, .step-card { 
+        background-color: #111111;
+        border: 1px solid var(--secondary-accent); 
+        padding: px; 
+        transition: border-color 0.3s, 
+        box-shadow 0.3s; 
+    }
+    .feature-card:hover, .testimonial-card:hover { border-color: var(--primary-accent); box-shadow: inset 0 0 10px var(--glow-color), 0 0 10px var(--glow-color); }
+    .features-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        gap: 10px; 
+    }
+    .feature-card .icon { 
+        margin-bottom: 20px;
+        color: #00ff00;
+        border: 1px solid white;
+        align-items: center;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px;
+        width: 48px;
+        background-color: rgb(24, 24, 24); 
+    }
+    .steps-container { 
+        
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        gap: 10px; 
+    }
+    .step-card { text-align: center; }
+    .step-number { font-size: 2rem; }
+    .testimonials-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .testimonial-card blockquote { border-left: 3px solid var(--primary-accent); padding-left: 20px; }
+
+    /* 8. FAQ Section */
+    #faq{
+        margin-top: 40px;
+    }
+    .faq-container { max-width: 100%; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--secondary-accent); }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; cursor: pointer; }
+    .faq-question h3 { margin-bottom: 0; font-size: 1.2rem;  font-weight: 200;}
+    .faq-answer { color: aliceblue; max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1); opacity: 0; }
+    .faq-answer p { padding-bottom: 15px; opacity: 0.8; }
+    .faq-item.active .faq-answer { max-height: 200px; opacity: 1; }
+    .faq-question::after { content: '[+]'; font-size: 1.5rem; }
+    .faq-item.active .faq-question::after { content: '[-]'; }
+
+    /* 9. Final CTA & Footer */
+    #final-cta { 
+        margin-top: 40px;
+        text-align: center; 
+    }
+    footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--secondary-accent); }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-links a { margin-left: 20px; }
+
+    /* 10. Animation on Scroll */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    #tech-stack {
+    text-align: center;
+    margin-top: 40px;
+    padding: px 0;
+    border-bottom: 0px dashed var(--secondary-accent); /* Or your preferred divider */
+}
+
+#use-cases{
+    margin-top: 40px;
+}
+
+#how-it-works {
+    margin-top: 40px;
+}
+#testimonials {
+    margin-top: 40px;
+}
+
+/* Use a different class name to avoid conflicts if you keep the old one */
+.tech-grid-full {
+    display: grid;
+    /* This will create 2, 3, or 4 columns depending on screen width */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    max-width: 1100px;
+    margin: 0;
+}
+
+.tech-card {
+    background: rgba(0, 20, 0, 0.3);
+    border: 1px solid var(--secondary-accent);
+    padding: 30px 20px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Ensure text is centered */
+}
+
+.tech-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-accent);
+    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.2), inset 0 0 10px var(--glow-color);
+}
+
+.tech-card img {
+    height: 50px;
+    width: auto;
+    max-width: 150px; /* Prevent wide logos from stretching too much */
+    margin-bottom: 20px;
+    object-fit: contain;
+    /* This filter is great for making logos fit a monochrome theme */
+    
+}
+
+.tech-card h3 {
+    font-size: 1.4rem;
+    color: var(--primary-accent);
+    margin-bottom: 10px;
+}
+
+.tech-card p {
+    font-size: 1rem;
+    opacity: 0.7;
+    line-height: 1.6;
+    margin: 0;
+}
+
+    /* 11. Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none; /* Hide by default on mobile */
+            flex-direction: column;
+            position: absolute;
+            top: 100%; /* Position below the navbar */
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--primary-accent);
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .nav-links.active {
+            display: flex; /* Show when active */
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .nav-links a {
+            width: 100%;
+            padding: 10px 0px;
+            text-align: center;
+            border-bottom: 1px solid var(--secondary-accent);
+        }
+        .nav-links a:last-child {
+            
+        }
+        .menu-toggle {
+            display: block; /* Show hamburger icon on mobile */
+        }
+        h1 { font-size: 2rem; }
+        .steps-container, .testimonials-container { flex-direction: column; display: flex; }
+        .footer-content { flex-direction: column; gap: 20px; }
+    }
+
+    /* Dashboard Specific Styles */
+    .dashboard-image-container svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .dashboard-image-container .map-path {
+        fill: #004400; /* Darker green for land */
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+    }
+    .dashboard-image-container .scan-line {
+        stroke: var(--primary-accent);
+        stroke-width: 1;
+        animation: scanline-anim 2s linear infinite;
+    }
+    .dashboard-image-container .scan-line-v {
+        stroke: #fd4829;
+        stroke-width: 1;
+        animation: scanline-anim-v 2s linear infinite;
+    }
+    @keyframes scanline-anim-v {
+        0% { transform: translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateX(100%); opacity: 0; }
+    }
+    @keyframes scanline-anim {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0; }
+        100% { transform: translateY(100%); opacity: 0; }
+    }
+    .dashboard-image-container .pulse-circle {
+        fill: var(--primary-accent);
+        animation: pulse 1.5s infinite alternate;
+    }
+    @keyframes pulse {
+        from { r: 2; opacity: 0.8; }
+        to { r: 5; opacity: 0.2; }
+    }
+    .dashboard-image-container .terminal-text {
+        font-size: 10px;
+        fill: white;
+    }
+    .dashboard-image-container .status-indicator {
+        
+        fill: ;
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+    .dashboard-image-container .progress-bar-bg {
+        fill: #001100;
+        stroke: var(--secondary-accent);
+        stroke-width: 0.5;
+    }
+    .dashboard-image-container .progress-bar-fill {
+        fill: var(--primary-accent);
+        animation: progress-fill 3s linear forwards;
+    }
+    @keyframes progress-fill {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    /* Chatbot Container */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: var(--font-main);
+        }
+
+        /* Chatbot Toggle Button */
+        .chatbot-toggle-button {
+            background-color: var(--primary-accent);
+            color: #000;
+            border: 1px solid var(--primary-accent);
+            border-radius: 8px;
+            width: 56px;
+            height: 56px;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--glow-color);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .chatbot-toggle-button:hover {
+            background: var(--secondary-accent);
+            box-shadow: 0 0 20px var(--primary-accent);
+        }
+
+        .chatbot-toggle-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Chat Window */
+        .chat-window {
+            background: #000;
+            border: 1.5px solid var(--primary-accent);
+            border-radius: 0;
+            box-shadow: 0 0 20px var(--glow-color);
+            width: 350px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            transform: translateY(10px) scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .chat-window.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            background: #000;
+            color: var(--primary-accent);
+            font-family: var(--font-main);
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--secondary-accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 1px;
+        }
+
+        .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: var(--primary-accent);
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        .chat-header .close-btn:hover {
+            color: #fff;
+        }
+
+        /* Chat Messages Area */
+        .chat-messages {
+            flex-grow: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: #0a0a0a;
+            border-bottom: 1px solid var(--secondary-accent);
+            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 10px 16px;
+            border-radius: 0;
+            max-width: 90%;
+            word-wrap: break-word;
+            font-size: 1em;
+            font-family: var(--font-main);
+            box-shadow: none;
+            border: none;
+        }
+
+        .message.user {
+            background: #003300;
+            color: #fff;
+            align-self: flex-end;
+            border-right: 3px solid var(--primary-accent);
+        }
+
+        .message.bot {
+            background: #000;
+            color: aliceblue;
+            align-self: flex-start;
+            border-left: 3px solid var(--primary-accent);
+        }
+
+        .message.loading {
+            background: #111;
+            color: #00ff00;
+            font-style: italic;
+            text-align: left;
+        }
+
+        /* Chat Input Area */
+        .chat-input-container {
+            display: flex;
+            padding: 10px 12px;
+            border-top: 1px solid var(--secondary-accent);
+            background: #000;
+            align-items: flex-end;
+        }
+
+        .chat-input-container textarea {
+            flex-grow: 1;
+            background: #0a0a0a;
+            color: var(--primary-accent);
+            border: 1px solid var(--primary-accent);
+            border-radius: 0;
+            padding: 10px 12px;
+            font-size: 1em;
+            font-family: var(--font-main);
+            resize: none;
+            outline: none;
+            margin-right: 10px;
+            max-height: 80px;
+            box-shadow: none;
+        }
+
+        .chat-input-container button {
+            background: var(--primary-accent);
+            color: #000;
+            border: 1px solid var(--primary-accent);
+            border-radius: 0;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chat-input-container button:hover {
+            background: var(--secondary-accent);
+            color: #fff;
+        }
+
+        .chat-input-container button:disabled {
+            background: #222;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #222;
+            border-top: 3px solid var(--primary-accent);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 400px) {
+            .chatbot-container {
+                bottom: 10px;
+                right: 10px;
+            }
+            .chat-window {
+                width: calc(100% - 40px); /* Full width minus margins */
+                height: 70vh; /* Make it taller on small screens */
+                bottom: 70px;
+                right: 10px;
+                left: 10px; /* Center it */
+            }
+            .chatbot-toggle-button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            .chat-input-container textarea {
+                max-height: 60px;
+            }
+            .message {
+                font-size: 0.9em; /* Slightly smaller on very small screens */
+            }
+        }
+</style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="#" class="nav-logo">
+                <i data-lucide="scan-line"></i>
+                <div>METASCANNER</div>
+            </a>
+            <div class="menu-toggle" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="#features">FEATURES</a>
+                <a href="#how-it-works">PROCESS</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://metascanner.vercel.app/" class="btn">LAUNCHER.EXE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="container">
+            <div class="hero-content reveal">
+                <h1 data-text="">DATA BEHIND THE PIXELS</h1>
+                <p>> Metascanner is a forensic-grade analysis tool that fuses deep metadata extraction with powerful AI content analysis.</p>
+                <a href="https://metascanner.vercel.app/" class="btn pulse">UPLOAD & ANALYZE →</a>
+            </div>
+            <div class="dashboard-image-container reveal" style="transition-delay: 0.3s;">
+                <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" font-family="Share Tech Mono, monospace" font-size="12" fill="#00ff00">
+                    <rect width="800" height="450" fill="#0A0A0A"/>
+                    <rect x="1" y="1" width="798" height="448" fill="none" stroke="#00ff00" stroke-width="1"/>
+                    <rect x="1" y="1" width="798" height="24" fill="#00ff00"/>
+                    <text x="5" y="17" fill="#ffffff" font-weight="bold">METASCANNER</text>
+                    <text x="788" y="17" fill="#ffffff" font-weight="bold" text-anchor="end">[-][ ][X]</text>
+
+                    <!-- World Map Section -->
+                    <g transform="translate(10, 35)">
+                        <rect x="0" y="0" width="780" height="400" fill="#001100" stroke="#00ff00" stroke-width="0.5"/>
+                        <text x="5" y="15" class="terminal-text">GEOLOCATION ANALYSIS: GLOBAL OVERVIEW</text>
+
+                        <!-- Stylized World Map Paths (Simplified for aesthetic) -->
+                        <g transform="translate(90, 00) scale(0.7)">
+                            <!-- North America -->
+                            <path class="map-path" d="M300 150 L280 100 L250 80 L200 70 L150 80 L100 120 L80 180 L100 250 L150 300 L200 320 L250 300 L280 250 Z"/>
+                            <!-- South America -->
+                            <path class="map-path" d="M200 350 L180 400 L150 450 L180 500 L220 520 L250 480 L230 400 Z"/>
+                            <!-- Europe -->
+                            <path class="map-path" d="M400 100 L420 80 L450 70 L480 80 L500 120 L480 150 L450 160 L420 140 Z"/>
+                            <!-- Africa -->
+                            <path class="map-path" d="M450 200 L480 250 L470 300 L450 350 L400 380 L350 370 L330 320 L350 250 Z"/>
+                            <!-- Asia -->
+                            <path class="map-path" d="M550 50 L600 70 L650 100 L700 150 L720 200 L700 250 L650 280 L600 270 L550 200 Z"/>
+                            <!-- Australia -->
+                            <path class="map-path" d="M650 350 L680 380 L670 420 L640 430 L610 400 L620 370 Z"/>
+                        </g>
+
+                        <!-- Simulated Scan Line -->
+                        <line x1="0" y1="50" x2="780" y2="50" class="scan-line-h-b"/>
+                        <line x1="100" y1="0" x2="100" y2="2000" class="scan-line-v-r"/>
+
+                        <line x1="0" y1="50" x2="780" y2="50" class="scan-line-h-t"/>
+                        <line x1="100" y1="0" x2="100" y2="2000" class="scan-line-v-l"/>
+
+                        <!-- Simulated Data Points / Hotspots -->
+                        <circle cx="210" cy="150" r="3" class="pulse-circle"/> <!-- North America -->
+                        <circle cx="150" cy="280" r="3" class="pulse-circle" style="animation-delay: 0.5s;"/> <!-- South America -->
+                        <circle cx="400" cy="100" r="3" class="pulse-circle" style="animation-delay: 1s;"/> <!-- Europe -->
+                        <circle cx="380" cy="220" r="3" class="pulse-circle" style="animation-delay: 1.5s;"/> <!-- Africa -->
+                        <circle cx="580" cy="150" r="3" class="pulse-circle" style="animation-delay: 2s;"/> <!-- Asia -->
+                        <circle cx="620" cy="300" r="3" class="pulse-circle" style="animation-delay: 2.5s;"/> <!-- Australia -->
+
+                    
+                        <!-- System Status Indicators (moved to bottom right of map container) -->
+                        <text x="20" y="300" class="terminal-text">SYSTEM STATUS:</text>
+                        <circle cx="25" cy="315" r="3" class="status-indicator"/>
+                        <text x="40" y="320" class="terminal-text">CORE ONLINE</text>
+                        <circle cx="25" cy="330" r="3" class="status-indicator" style="animation-delay: 0.2s;"/>
+                        <text x="40" y="335" class="terminal-text">AI MODULE ACTIVE</text>
+                        <circle cx="25" cy="345" r="3" class="status-indicator" style="animation-delay: 0.4s;"/>
+                        <text x="40" y="350" class="terminal-text">NETWORK SECURE</text>
+                        <text x="20" y="370" class="terminal-text">APP: METASCANNER</text>
+                        <text x="20" y="385" class="terminal-text">USER: USERNAME666</text>
+
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- All other sections remain the same, styled by the new CSS -->
+        <section id="features" class="container">
+            <h2 class="reveal">A COMPLETE FORENSIC TOOLKIT</h2>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="icon">
+                        <i data-lucide="database-zap"></i>
+                    </div>
+                    <h3>Deep Metadata Extraction</h3>
+                    <p>Extract and decipher comprehensive data sets including EXIF, IPTC, and XMP to reveal camera models, lens specifications, and edit history.</p>
+                </div>
+
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <div class="icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3>Precision Geolocation</h3>
+                    <p>Pinpoint the exact location an image was captured. Visualize GPS coordinates on an interactive map to track origins and verify location claims.</p>
+                </div>
+
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                    <div class="icon">
+                        <i data-lucide="brain-circuit"></i>
+                    </div>
+                    <h3>Intelligent AI Analysis</h3>
+                    <p>Our proprietary AI engine analyzes visual content to identify objects, scenes, and potential manipulations, providing unmatched contextual understanding.</p>
+                </div>
+
+                <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                    <div class="icon">
+                        <i data-lucide="shield-check"></i>
+                    </div><h3>Secure Analysis History</h3>
+                    <p>Your analysis history is securely stored. Access previous sessions and compressed image previews at any time via your encrypted user dashboard.</p>
+                </div>
+
+                <div class="feature-card reveal" style="transition-delay: 0.4s;">
+                    <div class="icon"><i data-lucide="file-text" size="36"></i></div>
+                    <h3>Comprehensive Reporting</h3>
+                    <p>Generate detailed, shareable reports of your findings. Perfect for case files, journalistic verification, or personal archival purposes.</p>
+                </div>
+
+                <div class="feature-card reveal" style="transition-delay: 0.5s;">
+                    <div class="icon"><i data-lucide="lock" size="36"></i></div>
+                    <h3>Secure & Anonymous</h3>
+                    <p>Your analysis sessions are private. We operate on a zero-knowledge principle, ensuring your uploaded data is purged after every session.</p>
+                </div>
+
+        </div>
+    </section>
+
+    <section id="tech-stack" class="container">
+    <h2 class="reveal">System Architecture & Key Technologies</h2>
+    
+
+    <div class="tech-grid-full">
+
+        <!-- Tech Item 1: Firebase -->
+        <div class="tech-card reveal">
+            <img src="assets/firebase.svg" alt="Firebase Logo">
+            <h3>Firebase</h3>
+            <p>Powers our secure user authentication and stores your analysis history in a real-time Firestore database.</p>
+        </div>
+
+        <!-- Tech Item 2: Google Gemini -->
+        <div class="tech-card reveal" style="transition-delay: 0.1s;">
+            <img src="/assets/gemini.svg" alt="Google Gemini Logo">
+            <h3>Google Gemini</h3>
+            <p>The advanced multimodal AI model that provides contextual visual analysis and descriptions for your images.</p>
+        </div>
+        
+        <!-- Tech Item 3: Vite -->
+        <div class="tech-card reveal" style="transition-delay: 0.2s;">
+            <img src="assets/vite.svg" alt="Vite.js Logo">
+            <h3>Vite.js</h3>
+            <p>Provides a lightning-fast development experience and bundles the application into a highly optimized production build.</p>
+        </div>
+
+        <!-- Tech Item 4: Leaflet.js -->
+        <div class="tech-card reveal" style="transition-delay: 0.3s;">
+            <img src="assets/leafletjs.png" alt="Leaflet.js Logo">
+            <h3>Leaflet.js</h3>
+            <p>The engine behind our interactive, lightweight, and high-performance geolocation mapping.</p>
+        </div>
+
+        <!-- Tech Item 5: OpenCage API -->
+        <div class="tech-card reveal" style="transition-delay: 0.4s;">
+            <img src="assets/opencage.svg" alt="OpenCage API Logo">
+            <h3>OpenCage API</h3>
+            <p>Provides fast and reliable reverse geocoding to translate GPS coordinates into human-readable addresses.</p>
+        </div>
+
+        <!-- Tech Item 6: Exifr.js -->
+        <div class="tech-card reveal" style="transition-delay: 0.5s;">
+            <img src="assets/exifr.png" alt="Exifr.js Logo">
+            <h3>Exifr.js</h3>
+            <p>A high-performance parsing engine for rapidly extracting even the most complex metadata from any image file.</p>
+        </div>
+
+    </div>
+    </section>
+
+    <section id="use-cases" class="container">
+    <h2 class="reveal">USE CASES</h2>
+    <div class="use-case-grid"> <!-- Use a similar grid style to your features -->
+
+        <div class="feature-card reveal">
+            <div class="icon"><i data-lucide="newspaper"></i></div>
+            <h3>For the Investigative Journalist</h3>
+            <p>Verify the source and location of whistleblower photos. Uncover alterations in images provided by sources to ensure your story is accurate and defensible.</p>
+        </div>
+
+        <div class="feature-card reveal" style="transition-delay: 0.2s;">
+            <div class="icon"><i data-lucide="fingerprint"></i></div>
+            <h3>For the Digital Forensics Analyst</h3>
+            <p>Establish a chain of custody for digital evidence. Extract crucial timestamps, device serial numbers, and GPS data for legal proceedings and case reports.</p>
+        </div>
+
+        <div class="feature-card reveal" style="transition-delay: 0.4s;">
+            <div class="icon"><i data-lucide="shield-check"></i></div>
+            <h3>For the Security Researcher</h3>
+            <p>Analyze images for embedded malware or tracking information. Identify the software and versions used to create a file, exposing potential vulnerabilities.</p>
+        </div>
+
+    </div>
+    </section>
+        
+        
+    <section id="how-it-works" class="container">
+        <h2 class="reveal">How It Works</h2>
+        <div class="steps-container">
+
+            <div class="step-card reveal">
+                <div class="step-number">01</div>
+                <h3>Submit Your Image</h3>
+                <p>Securely upload your image file. Our platform accepts a wide range of formats and ensures your data is handled with strict confidentiality.</p>
+            </div>
+
+            <div class="step-card reveal" style="transition-delay: 0.2s;">
+                <div class="step-number">02</div>
+                <h3>Initiate Analysis</h3>
+                <p>Metascanner initiates a multi-layered analysis, cross-referencing metadata with our AI content evaluation. The process is swift and precise.</p>
+            </div>
+
+            <div class="step-card reveal" style="transition-delay: 0.4s;">
+                <div class="step-number">03</div>
+                <h3>Uncover the Report</h3>
+                <p>Receive and explore your detailed report. Navigate through interactive data points, maps, and AI-generated insights to uncover the full story.</p>
+            </div>
+        </div>
+    </section>
+        
+            
+    <section id="testimonials" class="container"><h2 class="reveal">Engineered for Accuracy. Trusted by Experts.</h2><div class="testimonials-container"><div class="testimonial-card reveal"><blockquote>"Metascanner revealed geolocation data that was critical for our investigation. An indispensable tool."</blockquote><cite>– Digital Forensics Analyst</cite></div><div class="testimonial-card reveal" style="transition-delay: 0.2s;"><blockquote>"The ability to cross-reference EXIF data with AI analysis provides a level of verification I can't get anywhere else."</blockquote><cite>– Investigative Journalist</cite></div></div></section>
+        
+        <section id="faq" class="container">
+            <h2 class="reveal">Frequently Asked Questions</h2>
+            <div class="faq-container reveal">
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What types of metadata can Metascanner extract?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Metascanner extracts a comprehensive range of data, including EXIF (camera settings, date/time), IPTC (copyright, keywords), and XMP (edit history, author information), providing a complete picture of an image's origin and lifecycle.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my data secure and private?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We prioritize your privacy and security. All uploads are encrypted in transit and at rest. We do not share, sell, or analyze your images for any purpose other than providing you with your requested report. Your data is your own.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can Metascanner detect if an image has been edited?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. By analyzing metadata tags related to software (like Adobe Photoshop or GIMP) and comparing data inconsistencies, Metascanner can provide strong indicators of digital alteration. Our AI also scans for visual artifacts associated with manipulation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What file formats are supported?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We support all major image formats, including JPEG, PNG, TIFF, HEIC, and various camera RAW formats (e.g., .CR2, .NEF, .ARW). Our system is continuously updated to support new and emerging file types.</p>
+                    </div>
+                </div>
+            </div>
+
+            </section>
+        
+        <section id="final-cta" class="container reveal">
+            <h2 class="reveal">Ready to See the Unseen?</h2>
+            <p>> Begin your journey into deep image analysis and unlock a new dimension of information.</p>
+            <a href="https://metascanner.vercel.app/" class="btn">LAUNCH SCANNER →</a>
+        </section>
+
+        <div class="chatbot-container">
+            <button class="chatbot-toggle-button" id="chatbotToggle"><i data-lucide="bot"></i></button>
+            <div class="chat-window" id="chatWindow">
+                <div class="chat-header">
+                    Metascan AI
+                    <button class="close-btn" id="closeChat">&times;</button>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-container">
+                    <textarea id="chatInput" rows="1" placeholder="Type your message..."></textarea>
+                    <button id="sendMessageBtn"><i data-lucide="forward"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer class="container"><div class="footer-content"><p class="copyright-text">// Metascanner_ v2.1 -- All Rights Reserved.</p><div class="footer-links"><a href="#">--privacy_policy</a><a href="#">--terms_of_service</a><a href="#">--contact_ops</a></div></div></footer>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((e)=>{e.forEach((e)=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.1});
+        document.querySelectorAll(".reveal").forEach((e)=>{observer.observe(e)});
+        document.querySelectorAll(".faq-question").forEach(e=>{e.addEventListener("click",()=>{e.parentElement.classList.toggle("active")})});
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatWindow = document.getElementById('chatWindow');
+            const closeChatBtn = document.getElementById('closeChat');
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+            let chatHistory = []; // Stores chat history for context
+
+            // --- Chatbot UI Toggle ---
+            chatbotToggle.addEventListener('click', () => {
+                chatWindow.classList.toggle('open');
+                if (chatWindow.classList.contains('open')) {
+                    chatInput.focus();
+                    scrollToBottom();
+                    // Send initial welcome message if chat history is empty
+                    if (chatHistory.length === 0) {
+                        appendMessage("Hello! I'm your AI assistant. How can I help you learn about this website today?", 'bot');
+                    }
+                }
+            });
+
+            closeChatBtn.addEventListener('click', () => {
+                chatWindow.classList.remove('open');
+            });
+
+            // --- Message Handling ---
+            function appendMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', sender);
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+            }
+
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Auto-resize textarea
+            chatInput.addEventListener('input', () => {
+                chatInput.style.height = 'auto';
+                chatInput.style.height = chatInput.scrollHeight + 'px';
+            });
+
+            // Send message on Enter key (Shift+Enter for new line)
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault(); // Prevent new line
+                    sendMessage();
+                }
+            });
+
+            sendMessageBtn.addEventListener('click', sendMessage);
+
+            async function sendMessage() {
+                const userMessage = chatInput.value.trim();
+                if (userMessage === '') return;
+
+                appendMessage(userMessage, 'user');
+                chatInput.value = '';
+                chatInput.style.height = 'auto'; // Reset height after sending
+
+                // Add user message to chat history
+                chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+                // Show loading indicator
+                const loadingMessageDiv = document.createElement('div');
+                loadingMessageDiv.classList.add('message', 'bot', 'loading');
+                loadingMessageDiv.innerHTML = 'Thinking... <span class="spinner"></span>';
+                chatMessages.appendChild(loadingMessageDiv);
+                scrollToBottom();
+
+                sendMessageBtn.disabled = true; // Disable send button
+                chatInput.disabled = true; // Disable input
+
+                try {
+                    // Define the prompt for the LLM.
+                    // IMPORTANT: In a real application, you would dynamically fetch or inject
+                    // content from your website here to make the bot truly knowledgeable.
+                    // For this demo, we're giving it a generic context.
+                    const websiteContext = `
+                        This website is called "Metascanner".
+                        It is a premier image metadata analysis engine and an OSINT (Open-Source Intelligence) project, primarily focused on cyber security and digital forensics.
+
+                        **Project Team & Affiliation:**
+                        Metascanner was developed by Team Delta, comprising students from Prabhu Jagatbandhu College:
+                        - Debmalya Mondal (GitHub: https://github.com/debmalyamondal)
+                        - Ayush Kumar Singh
+                        - Arnab Bag
+                        - Ankita Pantu
+                        The project copyright is © 2025.
+
+                        **Core Purpose:**
+                        Metascanner's primary purpose is to retrieve, analyze, and decipher deep metadata from image files. It leverages advanced AI protocols to reveal critical data and hidden truths embedded within visual assets, aiding in digital forensics and investigative journalism.
+
+                        **Key Features & Capabilities:**
+                        1.  **Deep Metadata Extraction:** Extracts and deciphers comprehensive data sets including EXIF (camera settings, date/time, exposure, ISO, focal length, flash status), IPTC (copyright, keywords, creator, headline, description), and XMP (edit history, author information). It reveals camera models, lens specifications, software used, and image dimensions.
+                        2.  **Precision Geolocation Mapping:** Pinpoints the exact geographical location an image was captured using GPS coordinates (latitude, longitude, altitude, speed, direction, DOP). It visualizes these locations on an interactive world map (using OpenStreetMap, Satellite, and Topography layers via Leaflet.js) and provides human-readable addresses through reverse geocoding (OpenCage API). Users can also view locations directly on Google Maps.
+                        3.  **Intelligent AI Content Analysis:** Utilizes a proprietary AI engine (Gemini API) to analyze the visual content of images. It identifies objects, scenes, dominant colors, and potential manipulations, providing unmatched contextual understanding and indicators of digital alteration.
+                        4.  **Secure & Comprehensive History:** Stores analysis history securely, allowing users to access previous sessions, detailed reports, and compressed image previews via an encrypted user dashboard. History entries include location, timestamp, and extracted metadata, with options to delete entries.
+                        5.  **Data Export & Reporting:** Allows users to download comprehensive analysis reports in PDF format (including image preview, extracted metadata, AI analysis, and raw metadata) and export raw metadata in JSON format.
+
+                        **How Metascanner Works (Process):**
+                        1.  **Submit Your Image:** Users securely upload an image file (supports JPEG, PNG, TIFF, HEIC, RAW formats).
+                        2.  **Initiate Analysis Protocol:** The platform performs a multi-layered analysis, cross-referencing metadata with AI content evaluation.
+                        3.  **Uncover the Full Report:** A detailed, interactive report is generated, displaying metadata, geolocation on a map, and AI-generated insights.
+
+                        **Security & Privacy:**
+                        Metascanner prioritizes user privacy and data security. All uploads are encrypted in transit and at rest. The platform adheres to a strict policy of not sharing, selling, or analyzing user images for any purpose other than generating the requested report.
+
+                        **Support & Contact:**
+                        For support or inquiries, users can typically find links to a privacy policy, terms of service, and contact operations in the footer of the website.
+                        (Note: Specific contact email/page not provided in the code, but typically support@metascanner.com or a contact form would be available.)
+
+                        **Technologies Used (Backend/Client-side):**
+                        - Frontend: HTML, CSS, JavaScript
+                        - External Libraries: Leaflet.js (for maps), exifr (for EXIF parsing), jspdf (for PDF generation), html2canvas (for canvas rendering), Lucide Icons.
+                        - APIs: Google Gemini API (for AI analysis), OpenCage Geocoding API (for reverse geocoding).
+                        - Backend/Data Storage: Firebase (for user authentication and secure history storage in Firestore).
+                    `;
+
+                    const prompt = `
+                        You are Metascan AI, You are a friendly and helpful AI assistant for the "Metascanner" website.
+                        Your goal is to answer user questions about the website's features, purpose, services, and how to get support.
+                        Here is some context about the website:
+                        ${websiteContext}
+
+                        Based on the conversation history and the provided context, respond to the user's last message.
+                        If you don't have specific information, you can say something like "I don't have that specific detail, but I can tell you about our main services."
+                        Keep your answers concise and professional.
+                    `;
+
+                    // Prepare chat history for the API call, including the system prompt
+                    let conversationForAPI = [{ role: "user", parts: [{ text: prompt }] }];
+                    // Add previous user and bot messages to maintain context
+                    chatHistory.forEach(msg => conversationForAPI.push(msg));
+
+
+                    const payload = { contents: conversationForAPI };
+                    const apiKey = "AIzaSyAxMDDrKSWjVkh3IYNoalI3U1FIO9TPwIY"; // Leave as-is, Canvas will provide it
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    // Remove loading message
+                    chatMessages.removeChild(loadingMessageDiv);
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const botResponse = result.candidates[0].content.parts[0].text;
+                        appendMessage(botResponse, 'bot');
+                        // Add bot message to chat history
+                        chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
+                    } else {
+                        appendMessage('Sorry, I could not get a response from the AI. Please try again.', 'bot');
+                        console.error('Unexpected API response structure:', result);
+                    }
+                } catch (error) {
+                    // Remove loading message even on error
+                    if (chatMessages.contains(loadingMessageDiv)) {
+                        chatMessages.removeChild(loadingMessageDiv);
+                    }
+                    appendMessage('An error occurred while connecting to the AI. Please check your network and try again.', 'bot');
+                    console.error('Error calling Gemini API:', error);
+                } finally {
+                    sendMessageBtn.disabled = false; // Re-enable send button
+                    chatInput.disabled = false; // Re-enable input
+                    chatInput.focus(); // Focus input for next message
+                }
+            }
+        });
+
+
+        
+    </script>
+</body>
+</html>
