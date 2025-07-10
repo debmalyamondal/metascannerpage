@@ -21,7 +21,8 @@ export default defineConfig({
         main: 'index.html',
         privacy: 'privacy-policy.html',
         dataProtection: 'data-protection.html',
-        terms: 'terms-of-service.html'
+        terms: 'terms-of-service.html',
+        contributors: 'contributors.html'
       }
     }
   },
