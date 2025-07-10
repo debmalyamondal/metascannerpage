@@ -605,7 +605,6 @@
 }
 .testimonial-rect-card:hover {
   border-left-color: #fff;
-  box-shadow: 0 0 32px 0 var(--primary-accent), 0 2px 24px 0 rgba(0,255,0,0.18);
   transform: translateY(-2px) scale(1.01);
 }
 .testimonial-rect-card blockquote {
