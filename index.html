@@ -7,7 +7,7 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="icon" href="assets/scan-line.svg">
+    <link rel="icon" href="/assets/scan-line.svg">
     <!-- Google Fonts: Share Tech Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="container reveal" style="transition-delay: 3.3s;">
+        <section id="hero" class="container reveal" style="transition-delay: 0.3s;">
             <div class="hero-content reveal">
                 <h1 data-text="">FIND DATA BEHIND THE PIXELS</h1>
                 <p>> Metascanner is a forensic-grade analysis tool that fuses deep metadata extraction with powerful AI content analysis.</p>
@@ -62,8 +62,8 @@
                     <rect width="800" height="450" fill="#0A0A0A"/>
                     <rect x="1" y="1" width="798" height="448" fill="none" stroke="#00ff00" stroke-width="1"/>
                     <rect x="1" y="1" width="798" height="24" fill="#00ff00"/>
-                    <text x="5" y="17" fill="#ffffff" font-weight="bold">METASCANNER</text>
-                    <text x="788" y="17" fill="#ffffff" font-weight="bold" text-anchor="end">[-][ ][X]</text>
+                    <text x="5" y="17" fill="#000000" font-weight="bold">METASCANNER ANALYZER ENGINE</text>
+                    <text x="788" y="17" fill="#000000" font-weight="bold" text-anchor="end">[-][ ][X]</text>
                     <g transform="translate(10, 35)">
                         <rect x="0" y="0" width="780" height="400" fill="#001100" stroke="#00ff00" stroke-width="0.5"/>
                         <text x="5" y="15" class="terminal-text">GEOLOCATION ANALYSIS: GLOBAL OVERVIEW</text>
@@ -99,11 +99,39 @@
 
         <!-- ... (Rest of your sections: features, tech-stack, use-cases, etc.) ... -->
         <section id="features" class="container"><h2 class="reveal">A COMPLETE FORENSIC TOOLKIT</h2><div class="features-grid"><div class="feature-card reveal"><div class="icon"><i data-lucide="database-zap"></i></div><h3>Deep Metadata Extraction</h3><p>Extract and decipher comprehensive data sets including EXIF, IPTC, and XMP to reveal camera models, lens specifications, and edit history.</p></div><div class="feature-card reveal" style="transition-delay: 0.1s;"><div class="icon"><i data-lucide="map-pin"></i></div><h3>Precision Geolocation</h3><p>Pinpoint the exact location an image was captured. Visualize GPS coordinates on an interactive map to track origins and verify location claims.</p></div><div class="feature-card reveal" style="transition-delay: 0.2s;"><div class="icon"><i data-lucide="brain-circuit"></i></div><h3>Intelligent AI Analysis</h3><p>Our proprietary AI engine analyzes visual content to identify objects, scenes, and potential manipulations, providing unmatched contextual understanding.</p></div><div class="feature-card reveal" style="transition-delay: 0.3s;"><div class="icon"><i data-lucide="shield-check"></i></div><h3>Secure Analysis History</h3><p>Your analysis history is securely stored. Access previous sessions and compressed image previews at any time via your encrypted user dashboard.</p></div><div class="feature-card reveal" style="transition-delay: 0.4s;"><div class="icon"><i data-lucide="file-text" size="36"></i></div><h3>Comprehensive Reporting</h3><p>Generate detailed, shareable reports of your findings. Perfect for case files, journalistic verification, or personal archival purposes.</p></div><div class="feature-card reveal" style="transition-delay: 0.5s;"><div class="icon"><i data-lucide="lock" size="36"></i></div><h3>Secure & Anonymous</h3><p>Your analysis sessions are private. We operate on a zero-knowledge principle, ensuring your uploaded data is purged after every session.</p></div></div></section>
-        <section id="tech-stack" class="container"><h2 class="reveal">System Architecture & Key Technologies</h2><div class="tech-grid-full"><div class="tech-card reveal"><img src="assets/firebase.svg" alt="Firebase Logo"><h3>Firebase</h3><p>Powers our secure user authentication and stores your analysis history in a real-time Firestore database.</p></div><div class="tech-card reveal" style="transition-delay: 0.1s;"><img src="/assets/gemini.svg" alt="Google Gemini Logo"><h3>Google Gemini</h3><p>The advanced multimodal AI model that provides contextual visual analysis and descriptions for your images.</p></div><div class="tech-card reveal" style="transition-delay: 0.2s;"><img src="assets/vite.svg" alt="Vite.js Logo"><h3>Vite.js</h3><p>Provides a lightning-fast development experience and bundles the application into a highly optimized production build.</p></div><div class="tech-card reveal" style="transition-delay: 0.3s;"><img src="assets/leafletjs.png" alt="Leaflet.js Logo"><h3>Leaflet.js</h3><p>The engine behind our interactive, lightweight, and high-performance geolocation mapping.</p></div><div class="tech-card reveal" style="transition-delay: 0.4s;"><img src="assets/opencage.svg" alt="OpenCage API Logo"><h3>OpenCage API</h3><p>Provides fast and reliable reverse geocoding to translate GPS coordinates into human-readable addresses.</p></div><div class="tech-card reveal" style="transition-delay: 0.5s;"><img src="assets/exifr.png" alt="Exifr.js Logo"><h3>Exifr.js</h3><p>A high-performance parsing engine for rapidly extracting even the most complex metadata from any image file.</p></div></div></section>
+        
+        <section id="tech-stack" class="container"><h2 class="reveal">System Architecture & Key Technologies</h2><div class="tech-grid-full"><div class="tech-card reveal"><img src="/assets/firebase.svg" alt="Firebase Logo"><h3>Firebase</h3><p>Powers our secure user authentication and stores your analysis history in a real-time Firestore database.</p></div><div class="tech-card reveal" style="transition-delay: 0.1s;"><img src="/assets/gemini.svg" alt="Google Gemini Logo"><h3>Google Gemini</h3><p>The advanced multimodal AI model that provides contextual visual analysis and descriptions for your images.</p></div><div class="tech-card reveal" style="transition-delay: 0.2s;"><img src="/assets/vite.svg" alt="Vite.js Logo"><h3>Vite.js</h3><p>Provides a lightning-fast development experience and bundles the application into a highly optimized production build.</p></div><div class="tech-card reveal" style="transition-delay: 0.3s;"><img src="/assets/leafletjs.png" alt="Leaflet.js Logo"><h3>Leaflet.js</h3><p>The engine behind our interactive, lightweight, and high-performance geolocation mapping.</p></div><div class="tech-card reveal" style="transition-delay: 0.4s;"><img src="/assets/opencage.svg" alt="OpenCage API Logo"><h3>OpenCage API</h3><p>Provides fast and reliable reverse geocoding to translate GPS coordinates into human-readable addresses.</p></div><div class="tech-card reveal" style="transition-delay: 0.5s;"><img src="/assets/exifr.png" alt="Exifr.js Logo"><h3>Exifr.js</h3><p>A high-performance parsing engine for rapidly extracting even the most complex metadata from any image file.</p></div></div></section>
+        
         <section id="use-cases" class="container"><h2 class="reveal">USE CASES</h2><div class="use-case-grid"><div class="feature-card reveal"><div class="icon"><i data-lucide="newspaper"></i></div><h3>For the Investigative Journalist</h3><p>Verify the source and location of whistleblower photos. Uncover alterations in images provided by sources to ensure your story is accurate and defensible.</p></div><div class="feature-card reveal" style="transition-delay: 0.2s;"><div class="icon"><i data-lucide="fingerprint"></i></div><h3>For the Digital Forensics Analyst</h3><p>Establish a chain of custody for digital evidence. Extract crucial timestamps, device serial numbers, and GPS data for legal proceedings and case reports.</p></div><div class="feature-card reveal" style="transition-delay: 0.4s;"><div class="icon"><i data-lucide="shield-check"></i></div><h3>For the Security Researcher</h3><p>Analyze images for embedded malware or tracking information. Identify the software and versions used to create a file, exposing potential vulnerabilities.</p></div></div></section>
-        <section id="how-it-works" class="container"><h2 class="reveal">How It Works</h2><div class="steps-container"><div class="step-card reveal"><div class="step-number">01</div><h3>Submit Your Image</h3><p>Securely upload your image file. Our platform accepts a wide range of formats and ensures your data is handled with strict confidentiality.</p></div><div class="step-card reveal" style="transition-delay: 0.2s;"><div class="step-number">02</div><h3>Initiate Analysis</h3><p>Metascanner initiates a multi-layered analysis, cross-referencing metadata with our AI content evaluation. The process is swift and precise.</p></div><div class="step-card reveal" style="transition-delay: 0.4s;"><div class="step-number">03</div><h3>Uncover the Report</h3><p>Receive and explore your detailed report. Navigate through interactive data points, maps, and AI-generated insights to uncover the full story.</p></div></div></section>
+        
+        <section id="how-it-works" class="container">
+            <h2 class="reveal">How It Works</h2>
+
+            <div class="steps-container">
+                <div class="step-card reveal">
+                    <div class="step-number">01</div>
+                    <h3>Submit Your Image</h3>
+                    <p>Securely upload your image file. Our platform accepts a wide range of formats and ensures your data is handled with strict confidentiality.</p>
+                </div>
+
+                <div class="step-card reveal" style="transition-delay: 0.2s;">
+                    <div class="step-number">02</div>
+                    <h3>Initiate Analysis</h3>
+                    <p>Metascanner initiates a multi-layered analysis, cross-referencing metadata with our AI content evaluation. The process is swift and precise.</p>
+                </div>
+
+                <div class="step-card reveal" style="transition-delay: 0.4s;">
+                    <div class="step-number">03</div>
+                    <h3>Uncover the Report</h3>
+                    <p>Receive and explore your detailed report. Navigate through interactive data points, maps, and AI-generated insights to uncover the full story.</p>
+                </div>
+            </div>
+        </section>
+        
         <section id="testimonials" class="container"><h2 class="reveal">Engineered for Accuracy. Trusted by Experts.</h2><div class="testimonials-container"><div class="testimonial-card reveal"><blockquote>"Metascanner revealed geolocation data that was critical for our investigation. An indispensable tool."</blockquote><cite>– Digital Forensics Analyst</cite></div><div class="testimonial-card reveal" style="transition-delay: 0.2s;"><blockquote>"The ability to cross-reference EXIF data with AI analysis provides a level of verification I can't get anywhere else."</blockquote><cite>– Investigative Journalist</cite></div></div></section>
+        
         <section id="faq" class="container"><h2 class="reveal">Frequently Asked Questions</h2><div class="faq-container reveal"><div class="faq-item"><div class="faq-question"><h3>What types of metadata can Metascanner extract?</h3></div><div class="faq-answer"><p>Metascanner extracts a comprehensive range of data, including EXIF (camera settings, date/time), IPTC (copyright, keywords), and XMP (edit history, author information), providing a complete picture of an image's origin and lifecycle.</p></div></div><div class="faq-item"><div class="faq-question"><h3>Is my data secure and private?</h3></div><div class="faq-answer"><p>Absolutely. We prioritize your privacy and security. All uploads are encrypted in transit and at rest. We do not share, sell, or analyze your images for any purpose other than providing you with your requested report. Your data is your own.</p></div></div><div class="faq-item"><div class="faq-question"><h3>Can Metascanner detect if an image has been edited?</h3></div><div class="faq-answer"><p>Yes. By analyzing metadata tags related to software (like Adobe Photoshop or GIMP) and comparing data inconsistencies, Metascanner can provide strong indicators of digital alteration. Our AI also scans for visual artifacts associated with manipulation.</p></div></div><div class="faq-item"><div class="faq-question"><h3>What file formats are supported?</h3></div><div class="faq-answer"><p>We support all major image formats, including JPEG, PNG, TIFF, HEIC, and various camera RAW formats (e.g., .CR2, .NEF, .ARW). Our system is continuously updated to support new and emerging file types.</p></div></div></div></section>
+        
         <section id="final-cta" class="container reveal"><h2 class="reveal">Ready to See the Unseen?</h2><p>> Begin your journey into deep image analysis and unlock a new dimension of information.</p><a href="https://metascanner.vercel.app/" class="btn">LAUNCH SCANNER →</a></section>
 
         <div class="chatbot-container">
@@ -122,7 +150,58 @@
         </div>
     </main>
 
-    <footer class="container"><div class="footer-content"><p class="copyright-text">// Metascanner_ v2.1 -- All Rights Reserved.</p><div class="footer-links"><a href="#">--privacy_policy</a><a href="#">--terms_of_service</a><a href="#">--contact_ops</a></div></div></footer>
+    <footer class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i data-lucide="scan-qr-code"></i>
+                        <span>METASCANNER</span>
+                    </div>
+                    <p class="footer-description">Advanced metadata extraction and AI powered image analysis for digital forensics and investigative journalism.</p>
+                </div>
+            </div>
+            
+           
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="https://app.metascanner.site/auth">Launch App</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>SUPPORT</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>&copy; 2025 Metascanner. All rights reserved.</p>
+                <p class="version-info">v2.1.0 // Built with advanced forensic protocols</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link" title="GitHub">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="#" class="social-link" title="Twitter">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="#" class="social-link" title="LinkedIn">
+                    <i data-lucide="linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
 
     <script type="module" src="/src/main.js"></script>
     

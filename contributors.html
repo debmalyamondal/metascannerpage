@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributors - Metascanner</title>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="assets/scan-line.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+
+    <style>
+        body {
+            padding: 10px;
+        }
+        .contributors-page {
+            padding: 40px 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contributors-page h1 {
+            color: var(--primary-accent);
+            font-family: 'Michroma';
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .contributors-page h2 {
+            color: var(--primary-accent);
+            font-family: var(--font-main);
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            text-align: center;
+        }
+        
+        .contributors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .contributor-card {
+            background: rgba(0, 20, 0, 0.3);
+            border: 1px solid var(--secondary-accent);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contributor-card:hover {
+            border-color: var(--primary-accent);
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.2), inset 0 0 10px var(--glow-color);
+            transform: translateY(-3px);
+        }
+        
+        .contributor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: bold;
+            border: 3px solid var(--primary-accent);
+            box-shadow: 0 0 15px var(--glow-color);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .contributor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .contributor-avatar .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #000;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        .contributor-name {
+            color: var(--primary-accent);
+            font-family: var(--font-main);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .contributor-role {
+            color: #ccc;
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .contributor-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .contributor-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--secondary-accent);
+            border-radius: 4px;
+            color: var(--primary-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(0, 20, 0, 0.3);
+        }
+        
+        .contributor-link:hover {
+            border-color: var(--primary-accent);
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px var(--glow-color);
+            transform: translateY(-2px);
+        }
+        
+        .supervisor-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--secondary-accent);
+        }
+        
+        .supervisor-card {
+            background: rgba(0, 20, 0, 0.3);
+            border: 2px solid var(--primary-accent);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .supervisor-card:hover {
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.3), inset 0 0 15px var(--glow-color);
+            transform: translateY(-3px);
+        }
+        
+        .supervisor-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-accent), #00cc00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #000;
+            font-weight: bold;
+            border: 4px solid var(--primary-accent);
+            box-shadow: 0 0 20px var(--glow-color);
+            margin: 0 auto 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .supervisor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .supervisor-avatar .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-accent), #00cc00);
+            color: #000;
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+        
+        .supervisor-name {
+            color: var(--primary-accent);
+            font-family: var(--font-main);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+        
+        .supervisor-role {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-family: var(--font-main);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            color: #fff;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        
+        @media (max-width: 768px) {
+            .contributors-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .contributor-card {
+                padding: 20px;
+            }
+            
+            .supervisor-card {
+                margin: 0 20px;
+            }
+            
+            /* Mobile navbar fixes */
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-color);
+                border-top: 1px solid var(--primary-accent);
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+                transition: all 0.3s ease-in-out;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 1000;
+            }
+            
+            .nav-links.active { 
+                display: flex; 
+                opacity: 1; 
+                pointer-events: auto; 
+            }
+            
+            .nav-links a { 
+                width: 100%; 
+                padding: 15px 0px; 
+                text-align: center; 
+                border-bottom: 1px solid var(--secondary-accent); 
+                font-size: 1rem;
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .menu-toggle { 
+                display: block; 
+                font-size: 1.5rem;
+                color: var(--primary-accent);
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 5px;
+            }
+            
+            .nav-logo {
+                font-size: 0.9rem;
+            }
+            
+            .nav-logo-icon {
+                height: 25px;
+                width: 25px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i data-lucide="scan-qr-code"></i>
+                </div>
+                <div>METASCANNER</div>
+            </a>
+            <div class="menu-toggle" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">← Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container contributors-page">
+        <a href="index.html" class="back-btn">
+            <i data-lucide="arrow-left"></i>
+            Back to Metascanner
+        </a>
+
+        <h1>CONTRIBUTORS</h1>
+        <p style="text-align: center; color: #ccc; margin-bottom: 40px;">Meet the team behind Metascanner's forensic-grade image analysis technology.</p>
+
+        <div class="contributors-grid">
+            <div class="contributor-card">
+                <div class="contributor-avatar">
+                    <img src="https://via.placeholder.com/80x80/00ff00/000000?text=JD" alt="John Doe" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;">DM</div>
+                </div>
+                <h3 class="contributor-name">Debmalya Mondal</h3>
+                <p class="contributor-role">Lead Developer & System Architect</p>
+                <div class="contributor-links">
+                    <a href="https://github.com/debmalyamondal" class="contributor-link" title="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/debmalya-mondal" class="contributor-link" title="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contributor-card">
+                <div class="contributor-avatar">
+                    <img src="https://via.placeholder.com/80x80/00ff00/000000?text=JS" alt="Jane Smith" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;">JS</div>
+                </div>
+                <h3 class="contributor-name">Jane Smith</h3>
+                <p class="contributor-role">AI/ML Engineer & Data Scientist</p>
+                <div class="contributor-links">
+                    <a href="https://github.com/janesmith" class="contributor-link" title="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/janesmith" class="contributor-link" title="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contributor-card">
+                <div class="contributor-avatar">
+                    <img src="assets/arnab.png" alt="Mike Johnson" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;"></div>
+                </div>
+                <h3 class="contributor-name">Mike Johnson</h3>
+                <p class="contributor-role">Frontend Developer & UI/UX Designer</p>
+                <div class="contributor-links">
+                    <a href="https://github.com/mikejohnson" class="contributor-link" title="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mikejohnson" class="contributor-link" title="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contributor-card">
+                <div class="contributor-avatar">
+                    <img src="https://via.placeholder.com/80x80/00ff00/000000?text=SB" alt="Sarah Brown" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;">SB</div>
+                </div>
+                <h3 class="contributor-name">Sarah Brown</h3>
+                <p class="contributor-role">Security Specialist & DevOps Engineer</p>
+                <div class="contributor-links">
+                    <a href="https://github.com/sarahbrown" class="contributor-link" title="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/sarahbrown" class="contributor-link" title="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="supervisor-section">
+            <h2>PROJECT SUPERVISOR</h2>
+            <div class="supervisor-card">
+                <div class="supervisor-avatar">
+                    <img src="https://via.placeholder.com/100x100/00ff00/000000?text=DR" alt="Dr. Robert Wilson" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;">DR</div>
+                </div>
+                <h3 class="supervisor-name">Dr. Robert Wilson</h3>
+                <p class="supervisor-role">Project Supervisor & Research Director</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i data-lucide="scan-qr-code"></i>
+                        <span>METASCANNER</span>
+                    </div>
+                    <p class="footer-description">Advanced metadata extraction and AI powered image analysis for digital forensics and investigative journalism.</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="https://app.metascanner.site/auth">Launch App</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>SUPPORT</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>&copy; 2025 Metascanner. All rights reserved.</p>
+                <p class="version-info">v2.1.0 // Built with advanced forensic protocols</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Show content immediately for legal pages (no preloader needed)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make content visible immediately
+            document.body.classList.add('loaded');
+            
+            // Initialize any animations or interactions
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                element.classList.add('visible');
+            });
+            
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.navbar')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Protection - Metascanner</title>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="assets/scan-line.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+
+    <style>
+        .legal-page {
+            padding: 40px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .legal-page h1 {
+            color: var(--primary-accent);
+            font-family: 'Michroma';
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .legal-page h2 {
+            color: var(--primary-accent);
+            font-family: var(--font-main);
+            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+            border-bottom: 1px solid var(--secondary-accent);
+            padding-bottom: 10px;
+        }
+        
+        .legal-page h3 {
+            color: #00ff00;
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
+        }
+        
+        .legal-page p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .legal-page ul {
+            color: #ccc;
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .legal-page li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-family: var(--font-main);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            color: #fff;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        
+        .last-updated {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--secondary-accent);
+        }
+
+        .gdr-badge {
+            display: inline-block;
+            background: var(--primary-accent);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: var(--font-main);
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i data-lucide="scan-qr-code"></i>
+                </div>
+                <div>METASCANNER</div>
+            </a>
+            <div class="menu-toggle" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">← Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container legal-page">
+        <a href="index.html" class="back-btn">
+            <i data-lucide="arrow-left"></i>
+            Back to Metascanner
+        </a>
+
+        <h1>DATA PROTECTION <span class="gdr-badge">GDPR COMPLIANT</span></h1>
+
+        <h2>1. GDPR COMPLIANCE</h2>
+        
+        <h3>1.1 Legal Basis for Processing</h3>
+        <p>Metascanner processes your data under the following legal bases:</p>
+        <ul>
+            <li><strong>Contract Performance:</strong> Processing necessary to provide our services</li>
+            <li><strong>Legitimate Interest:</strong> Security, fraud prevention, and service improvement</li>
+            <li><strong>Consent:</strong> For optional features and communications</li>
+        </ul>
+
+        <h3>1.2 Data Controller</h3>
+        <p>Metascanner acts as the data controller for all personal data processed through our platform. We are responsible for ensuring compliance with GDPR requirements.</p>
+
+        <h2>2. YOUR DATA RIGHTS (GDPR)</h2>
+        
+        <h3>2.1 Right of Access</h3>
+        <p>You have the right to request confirmation of whether we process your personal data and, where we do, access to the personal data and information about:</p>
+        <ul>
+            <li>The purposes of processing</li>
+            <li>The categories of personal data concerned</li>
+            <li>The recipients or categories of recipients</li>
+            <li>The envisaged retention period</li>
+            <li>Your rights under GDPR</li>
+        </ul>
+
+        <h3>2.2 Right to Rectification</h3>
+        <p>You have the right to have inaccurate personal data rectified and incomplete personal data completed.</p>
+
+        <h3>2.3 Right to Erasure ("Right to be Forgotten")</h3>
+        <p>You have the right to request the erasure of your personal data where:</p>
+        <ul>
+            <li>The personal data is no longer necessary</li>
+            <li>You withdraw consent</li>
+            <li>You object to processing</li>
+            <li>The personal data has been unlawfully processed</li>
+        </ul>
+
+        <h3>2.4 Right to Data Portability</h3>
+        <p>You have the right to receive your personal data in a structured, commonly used, machine-readable format and to transmit that data to another controller.</p>
+
+        <h3>2.5 Right to Object</h3>
+        <p>You have the right to object to processing of your personal data based on legitimate interests or for direct marketing purposes.</p>
+
+        <h2>3. DATA SECURITY MEASURES</h2>
+        
+        <h3>3.1 Technical Safeguards</h3>
+        <p>We implement comprehensive technical security measures:</p>
+        <ul>
+            <li><strong>Encryption:</strong> AES-256 for data at rest, TLS 1.3 for data in transit</li>
+            <li><strong>Access Controls:</strong> Role-based permissions and multi-factor authentication</li>
+            <li><strong>Network Security:</strong> Firewalls, intrusion detection, and DDoS protection</li>
+            <li><strong>Data Isolation:</strong> Separate processing environments for each user session</li>
+        </ul>
+
+        <h3>3.2 Organizational Safeguards</h3>
+        <p>We maintain strict organizational security practices:</p>
+        <ul>
+            <li>Regular security training for all staff</li>
+            <li>Background checks for personnel with data access</li>
+            <li>Incident response procedures</li>
+            <li>Regular security audits and penetration testing</li>
+        </ul>
+
+        <h2>4. DATA PROCESSING DETAILS</h2>
+        
+        <h3>4.1 Processing Purposes</h3>
+        <p>We process your data for the following purposes:</p>
+        <ul>
+            <li><strong>Service Provision:</strong> Metadata extraction and AI analysis</li>
+            <li><strong>Account Management:</strong> User authentication and profile management</li>
+            <li><strong>Security:</strong> Fraud prevention and platform security</li>
+            <li><strong>Support:</strong> Customer service and technical support</li>
+        </ul>
+
+        <h3>4.2 Data Categories</h3>
+        <p>We process the following categories of personal data:</p>
+        <ul>
+            <li><strong>Account Data:</strong> Email address, account preferences</li>
+            <li><strong>Usage Data:</strong> Analysis history, feature usage</li>
+            <li><strong>Technical Data:</strong> IP addresses, device information</li>
+            <li><strong>Content Data:</strong> Temporarily processed images (never stored)</li>
+        </ul>
+
+        <h2>5. INTERNATIONAL DATA TRANSFERS</h2>
+        
+        <h3>5.1 Transfer Safeguards</h3>
+        <p>When data is transferred outside the EEA, we ensure adequate protection through:</p>
+        <ul>
+            <li>Standard Contractual Clauses (SCCs)</li>
+            <li>Adequacy decisions by the European Commission</li>
+            <li>Binding corporate rules where applicable</li>
+            <li>Additional technical and organizational measures</li>
+        </ul>
+
+        <h3>5.2 Third-Party Processors</h3>
+        <p>We use the following third-party processors with appropriate safeguards:</p>
+        <ul>
+            <li><strong>Firebase (Google):</strong> Authentication and database services</li>
+            <li><strong>Google Gemini:</strong> AI analysis capabilities</li>
+            <li><strong>OpenCage:</strong> Geocoding services</li>
+        </ul>
+
+        <h2>6. DATA RETENTION POLICY</h2>
+        
+        <h3>6.1 Retention Periods</h3>
+        <p>We retain different types of data for specific periods:</p>
+        <ul>
+            <li><strong>Account Data:</strong> Until account deletion or 2 years of inactivity</li>
+            <li><strong>Analysis History:</strong> Until account deletion or user request</li>
+            <li><strong>Uploaded Images:</strong> Never stored - processed in memory only</li>
+            <li><strong>Log Data:</strong> 90 days for security and debugging</li>
+        </ul>
+
+        <h2>7. BREACH NOTIFICATION</h2>
+        
+        <p>In the event of a data breach that poses a risk to your rights and freedoms, we will:</p>
+        <ul>
+            <li>Notify the relevant supervisory authority within 72 hours</li>
+            <li>Notify affected users without undue delay</li>
+            <li>Document all breaches and remedial actions taken</li>
+            <li>Implement additional security measures as needed</li>
+        </ul>
+
+        <h2>8. DATA PROTECTION OFFICER</h2>
+        
+        <p>For data protection inquiries, contact our Data Protection Officer:</p>
+        <ul>
+            <li>Email: dpo@metascanner.site</li>
+            <li>Subject: Data Protection Inquiry</li>
+            <li>Response time: Within 30 days</li>
+        </ul>
+
+        <h2>9. SUPERVISORY AUTHORITY</h2>
+        
+        <p>You have the right to lodge a complaint with your local supervisory authority if you believe we have not addressed your concerns adequately.</p>
+
+        <h2>10. CHANGES TO DATA PROTECTION</h2>
+        
+        <p>We may update our data protection practices periodically. Significant changes will be communicated via email or platform notification at least 30 days in advance.</p>
+
+        <div class="last-updated">
+            <p>Last updated: January 2025</p>
+            <p>Version: 2.1.0</p>
+            <p>GDPR Compliance Status: Full Compliance</p>
+        </div>
+    </main>
+
+    <footer class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i data-lucide="scan-qr-code"></i>
+                        <span>METASCANNER</span>
+                    </div>
+                    <p class="footer-description">Advanced metadata extraction and AI powered image analysis for digital forensics and investigative journalism.</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="https://app.metascanner.site/auth">Launch App</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>SUPPORT</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="#">Contributors</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>&copy; 2025 Metascanner. All rights reserved.</p>
+                <p class="version-info">v2.1.0 // Built with advanced forensic protocols</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Show content immediately for legal pages (no preloader needed)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make content visible immediately
+            document.body.classList.add('loaded');
+            
+            // Initialize any animations or interactions
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                element.classList.add('visible');
+            });
+            
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.navbar')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

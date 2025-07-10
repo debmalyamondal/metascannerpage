@@ -108,9 +108,9 @@ lucide.createIcons();
                         **Project Team & Affiliation:**
                         Metascanner was developed by Team Delta, comprising students from Prabhu Jagatbandhu College:
                         - Debmalya Mondal (GitHub: https://github.com/debmalyamondal)
-                        - Ayush Kumar Singh
-                        - Arnab Bag
-                        - Ankita Pantu
+                        - Ayush Kumar Singh (GitHub: https://github.com/ayushkrsingh07)
+                        - Arnab Bag (GitHub: https://github.com/anomav)
+                        - Ankita Pantu (GitHub: https://github.com/ankita-pantu)
                         The project copyright is © 2025.
 
                         **Core Purpose:**

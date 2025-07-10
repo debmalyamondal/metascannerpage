@@ -224,10 +224,11 @@
       background-color: #00a300;
   }
   h3 { 
-      font-family: 'bebas neue';
-      letter-spacing: 0.2rem;
-      font-weight: 300;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0;
       text-transform: uppercase;
+      font-weight: 400;
+      
       font-size: 1.4rem; 
       margin-bottom: 0.75rem; 
   }
@@ -439,7 +440,8 @@
   .feature-card, .testimonial-card, .step-card { 
       background-color: #111111;
       border: 1px solid var(--secondary-accent); 
-      padding: px; 
+      padding: 10px; 
+      border-radius: 8px;
       transition: border-color 0.3s, 
       box-shadow 0.3s; 
   }
@@ -487,9 +489,222 @@
 
   /* 9. Final CTA & Footer */
   #final-cta { margin-top: 40px; text-align: center; }
-  footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--secondary-accent); }
-  .footer-content { display: flex; justify-content: space-between; align-items: center; }
-  .footer-links a { margin-left: 20px; }
+  
+  /* Enhanced Footer Styles */
+  footer { 
+      padding: 60px 0 20px 0; 
+      text-align: left; 
+      border-top: 1px solid var(--secondary-accent);
+      background: linear-gradient(180deg, rgba(0, 20, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      position: relative;
+  }
+  
+  footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-accent), transparent);
+  }
+  
+  .footer-content { 
+      display: flex;
+      justify-content: space-between;
+      
+      gap: 40px;
+      margin-top: 40px;
+      margin-bottom: 4px;
+  }
+  .footer-section{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .footer-section h4 {
+      color: var(--primary-accent);
+      font-family: var(--font-main);
+      font-size: 1rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+  }
+  
+  .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--primary-accent);
+      box-shadow: 0 0 5px var(--glow-color);
+  }
+  
+  .footer-brand {
+      max-width: 300px;
+  }
+  
+  .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      font-family: 'Michroma';
+      color: var(--primary-accent);
+      font-size: 1.2rem;
+  }
+  
+  .footer-logo i {
+      font-size: 1.5rem;
+      color: var(--primary-accent);
+  }
+  
+  .footer-description {
+      color: #ccc;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.8;
+  }
+  
+  .footer-links {
+    
+      list-style: inside;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .footer-links li {
+      margin-bottom: 12px;
+  }
+  
+  .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 0;
+  }
+  
+  .footer-links a::before {
+      content: '> ';
+      color: var(--primary-accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+      color: var(--primary-accent);
+      text-shadow: 0 0 5px var(--glow-color);
+  }
+  
+  .footer-links a:hover::before {
+      opacity: 1;
+  }
+  
+  .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 128, 0, 0.3);
+  }
+  
+  .footer-copyright p {
+      color: #888;
+      font-size: 0.85rem;
+      margin: 0;
+  }
+  
+  .version-info {
+      color: var(--primary-accent) !important;
+      font-family: var(--font-main);
+      font-size: 0.8rem !important;
+      opacity: 0.7;
+  }
+  
+  .footer-social {
+      display: flex;
+      gap: 15px;
+  }
+  
+  .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--secondary-accent);
+      border-radius: 4px;
+      color: var(--primary-accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: rgba(0, 20, 0, 0.3);
+  }
+  
+  .social-link:hover {
+      border-color: var(--primary-accent);
+      background: rgba(0, 255, 0, 0.1);
+      box-shadow: 0 0 10px var(--glow-color);
+      transform: translateY(-2px);
+  }
+  
+  .social-link i {
+      font-size: 1.2rem;
+  }
+  
+  /* Responsive Footer */
+  @media (max-width: 768px) {
+      .footer-content {
+          grid-template-columns: 1fr;
+          gap: 30px;
+      }
+      
+      .footer-brand {
+          max-width: 100%;
+          text-align: center;
+      }
+      
+      .footer-section {
+          text-align: center;
+      }
+      
+      .footer-section h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+      }
+      
+      .footer-bottom {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+      }
+      
+      .footer-social {
+          justify-content: center;
+      }
+  }
+  
+  @media (max-width: 480px) {
+      footer {
+          padding: 40px 0 20px 0;
+      }
+      
+      .footer-content {
+          gap: 25px;
+      }
+      
+      .footer-links a {
+          font-size: 0.85rem;
+      }
+  }
 
   /* 10. Animation on Scroll */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -552,7 +767,7 @@
   @keyframes scanline-anim { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 0; } 100% { transform: translateY(100%); opacity: 0; } }
   .dashboard-image-container .pulse-circle { fill: var(--primary-accent); animation: pulse 1.5s infinite alternate; }
   .dashboard-image-container .terminal-text { font-size: 10px; fill: white; }
-  .dashboard-image-container .status-indicator { fill: ; animation: blink 1s step-end infinite; }
+  .dashboard-image-container .status-indicator { fill: #00ff00; animation: blink 1s step-end infinite; }
   
   /* Chatbot Container */
   .chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: var(--font-main); }
